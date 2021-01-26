@@ -1,11 +1,11 @@
 {
   "name": "adopt-me",
-  "homepage": "https://alishabab.tech/adopt-me-pet-finder",
+  "homepage": "https://alishabab.tech/adopt-me-pet-finder/",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.html",
   "scripts": {
-    "dev": "parcel src/index.html",
+    "dev": "cross-env PUBLIC_URL=adopt-me parcel src/index.html",
     "build": "parcel build src/index.html",
     "dev:mock": "cross-env PET_MOCK=mock npm run dev",
     "predeploy": "npm run build",

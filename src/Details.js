@@ -1,11 +1,14 @@
 import React from 'react';
+import { navigate } from '@reach/router';
 import pet from '@frontendmasters/pet';
 import Carousel from './Carousel';
 import ErrorBoundry from './ErrorBoundry';
 import ThemeContext from './ThemeContext';
+import Modal from './Modal';
 class Details extends React.Component {
   state = {
     loading: true,
+    showModal: false,
   };
 
   componentDidMount() {
@@ -14,6 +17,7 @@ class Details extends React.Component {
         loading: false,
         name: animal.name,
         animal: animal.type,
+        url: animal.url,
         breed: animal.breeds.primary,
         description: animal.description,
         media: animal.photos,
@@ -21,6 +25,9 @@ class Details extends React.Component {
       });
     });
   }
+
+  toggleModal = () => this.setState({ showModal: !this.state.showModal });
+  adopt = () => navigate(this.state.url);
   render() {
     const {
       loading,
@@ -30,6 +37,7 @@ class Details extends React.Component {
       description,
       media,
       location,
+      showModal,
     } = this.state;
     if (loading) {
       return <h1>Loading...</h1>;
@@ -42,11 +50,27 @@ class Details extends React.Component {
           <h2>{`${animal} - ${breed} - ${location}`}</h2>
           <ThemeContext.Consumer>
             {([theme]) => (
-              <button style={{ backgroundColor: theme }}>Adopt {name}</button>
+              <button
+                onClick={this.toggleModal}
+                style={{ backgroundColor: theme }}
+              >
+                Adopt {name}
+              </button>
             )}
           </ThemeContext.Consumer>
 
           <p>{description}</p>
+          {showModal ? (
+            <Modal>
+              <div>
+                <h1>Would You like to adopt {name} ?</h1>
+                <div className="buttons">
+                  <button onClick={this.adopt}>Yes</button>
+                  <button onClick={this.toggleModal}>No</button>
+                </div>
+              </div>
+            </Modal>
+          ) : null}
         </div>
       </div>
     );
