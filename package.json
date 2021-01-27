@@ -1,15 +1,15 @@
 {
   "name": "adopt-me",
-  "homepage": "https://alishabab.tech/adopt-me-pet-finder/",
+  "homepage": "http://petfinderbyshabab.s3-website.ap-south-1.amazonaws.com/",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.html",
   "scripts": {
-    "dev": "cross-env PUBLIC_URL=adopt-me parcel src/index.html",
+    "dev": "parcel src/index.html",
     "build": "parcel build src/index.html",
     "dev:mock": "cross-env PET_MOCK=mock npm run dev",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
+    "deploy": "aws s3 cp dist/ s3://petfinderbyshabab --recursive",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
