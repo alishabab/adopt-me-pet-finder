@@ -1,19 +1,27 @@
 {
   "name": "adopt-me",
+  "homepage": "http://petfinderbyshabab.s3-website.ap-south-1.amazonaws.com/",
   "version": "1.0.0",
   "description": "",
-  "main": "App.js",
+  "main": "src/index.html",
   "scripts": {
     "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html",
     "dev:mock": "cross-env PET_MOCK=mock npm run dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "predeploy": "npm run build",
+    "deploy": "aws s3 cp dist/ s3://petfinderbyshabab --recursive",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
     "babel-eslint": "^10.1.0",
+    "babel-jest": "^26.6.3",
     "babel-preset-es2018": "^1.0.0",
     "babel-preset-react": "^6.24.1",
     "cross-env": "^7.0.3",
@@ -22,13 +30,17 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.21.5",
+    "gh-pages": "^3.1.0",
+    "jest": "^26.6.3",
     "parcel-bundler": "^1.12.4",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "react-test-renderer": "^17.0.1"
   },
   "dependencies": {
     "@frontendmasters/pet": "^1.0.3",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "@reach/router": "^1.3.4",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
   },
   "browserslist": [
     "last 2 Chrome versions"
